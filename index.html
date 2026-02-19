@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="Site-ul oficial al Asociației Studenților USAMV București. Află noutăți, proiecte și echipa care te reprezintă.">
+    <link rel="icon" type="image/png" href="logo-as.png"> 
+
+    <title>Asociația Studenților USAMV | Pagina Oficială</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ================= Variabile ================= */
+        :root {
+            --primary-green: #3B6A50; 
+            --dark-green: #2A5A40;
+            --accent-gold: #B8A058;
+            --usamv-green: #709900;
+            --bg-white: #FFFFFF;
+            --surface-light: #F4F7F5;
+            --text-dark: #1F2924;
+            --text-muted: #5C6B62;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-dark); background-color: var(--surface-light); line-height: 1.6; overflow-x: hidden; }
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* ================= ZONA 1: Header USAMV ================= */
+        .usamv-header-container {
+            background: var(--bg-white);
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.3s ease-in-out;
+        }
+        .usamv-inner-wrapper {
+            width: 100%;
+            max-width: 1400px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+        }
+        .usamv-logo img { height: 50px; display: block; }
+        .usamv-menu ul { display: flex; gap: 25px; align-items: center; }
+        .usamv-menu a {
+            font-family: 'Roboto', sans-serif; font-size: 13px; font-weight: 500;
+            text-transform: uppercase; color: var(--text-dark); transition: 0.3s;
+            padding: 10px 0; position: relative;
+        }
+        .usamv-menu a:hover { color: var(--usamv-green); }
+        .usamv-menu a.active { color: var(--usamv-green); border-bottom: 2px solid var(--usamv-green); }
+        .usamv-tools { display: flex; align-items: center; gap: 15px; }
+        .lang-flag img { height: 14px; opacity: 0.6; transition: 0.3s; cursor: pointer; }
+        .lang-flag:hover img, .lang-flag.active img { opacity: 1; }
+
+        /* ================= ZONA 2: Header Asociație ================= */
+        .assoc-header { 
+            background-color: var(--bg-white); 
+            padding: 15px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+        }
+        .assoc-logo { display: flex; align-items: center; gap: 10px; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 18px; color: var(--primary-green); }
+        .assoc-logo img { height: 45px; border-radius: 50%; }
+        
+        /* Navigație Desktop */
+        .assoc-nav ul { display: flex; gap: 25px; align-items: center; }
+        .assoc-nav a { font-weight: 500; color: var(--text-dark); transition: color 0.3s;}
+        .assoc-nav a:hover { color: var(--primary-green); }
+
+        /* Buton Hamburger (Ascuns pe desktop) */
+        .mobile-toggle { display: none; font-size: 1.8rem; cursor: pointer; color: var(--primary-green); }
+
+        /* Butoane Generale */
+        .btn { padding: 12px 28px; border-radius: 50px; font-weight: 600; font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.3s ease; display: inline-block; border: none;}
+        .btn-primary { background-color: var(--accent-gold); color: var(--bg-white); }
+        .btn-primary:hover { background-color: #a38d4a; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(184, 160, 88, 0.4); }
+        .btn-outline { background-color: transparent; color: var(--bg-white); border: 2px solid var(--bg-white); }
+        .btn-outline:hover { background-color: var(--bg-white); color: var(--primary-green); transform: translateY(-2px); }
+
+        /* ================= ZONA 3: Hero Section & Noul Logo ================= */
+        .hero { 
+            background: linear-gradient(rgba(42, 90, 64, 0.85), rgba(42, 90, 64, 0.85)), url('https://usamv.ro/wp-content/uploads/2020/10/campus-toamna.jpg') center/cover fixed; 
+            color: var(--bg-white); 
+            padding: 120px 5%; 
+            text-align: center;
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center;
+            min-height: 80vh; /* Se asigură că ocupă destul ecran */
+        }
+        .hero-logo-container img {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 50%;
+            background-color: var(--bg-white);
+            border: 3px solid var(--accent-gold);
+            padding: 8px; 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            object-fit: contain;
+        }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; line-height: 1.2; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;}
+        .hero p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px; color: #E0E0E0; line-height: 1.8; font-weight: 300;}
+        .hero-buttons { display: flex; gap: 15px; justify-content: center; }
+
+        /* ================= Titluri Secțiuni ================= */
+        .section { padding: 80px 5%; max-width: 1300px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-size: 2.5rem; color: var(--primary-green); margin-bottom: 15px; text-transform: uppercase;}
+        .section-header h2::after { content: ''; display: block; width: 60px; height: 4px; background: var(--accent-gold); margin: 15px auto 0; border-radius: 2px;}
+        .section-header p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+        /* ================= Despre Noi (Piloni FĂRĂ CASETE) ================= */
+        .about-text { text-align: center; max-width: 800px; margin: 0 auto 50px; font-size: 1.1rem; color: var(--text-muted); }
+        .pillars { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 40px; text-align: center; }
+        
+        .pillar { flex: 1; min-width: 250px; padding: 10px; transition: transform 0.3s;}
+        .pillar:hover { transform: translateY(-5px); }
+        
+        .pillar-icon { 
+            width: 80px; 
+            height: 80px; 
+            margin: 0 auto 20px; 
+            background: var(--bg-white); 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .pillar i { font-size: 2.2rem; color: var(--primary-green); transition: color 0.3s; }
+        .pillar:hover .pillar-icon { background: var(--primary-green); box-shadow: 0 8px 20px rgba(42,90,64,0.2); }
+        .pillar:hover .pillar-icon i { color: var(--accent-gold); }
+        .pillar h4 { color: var(--primary-green); text-transform: uppercase; margin-bottom: 10px; font-size: 1.1rem;}
+
+        /* ================= Carusel Echipa (Infinit) ================= */
+        .team-section { background-color: var(--surface-light); overflow: hidden; }
+        .carousel-wrapper { position: relative; max-width: 1300px; margin: 0 auto; display: flex; align-items: center; gap: 20px; }
+        .carousel-viewport { overflow: hidden; width: 100%; padding: 20px 0; touch-action: pan-y; /* Permite swipe */ }
+        .carousel-track { display: flex; gap: 24px; }
+        .team-card {
+            flex: 0 0 calc((100% - 48px) / 3); 
+            background-color: var(--bg-white); 
+            padding: 40px 20px; 
+            border-radius: 16px; 
+            text-align: center; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border-bottom: 4px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .team-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); border-bottom: 4px solid var(--accent-gold); }
+        .member-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 3px solid var(--surface-light);}
+        .member-name { font-size: 1.25rem; color: var(--text-dark); margin-bottom: 5px; font-weight: 700;}
+        .member-role { color: var(--accent-gold); font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; display: block;}
+        .member-contact { font-size: 0.9rem; color: #666; }
+
+        .carousel-btn {
+            background-color: var(--bg-white); border: 1px solid #e5e5e5; width: 45px; height: 45px;
+            border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); font-size: 1.2rem;
+            color: var(--primary-green); cursor: pointer; flex-shrink: 0; display: flex;
+            align-items: center; justify-content: center; transition: all 0.2s; z-index: 10;
+        }
+        .carousel-btn:hover { background-color: var(--primary-green); color: var(--bg-white); border-color: var(--primary-green); }
+
+        /* ================= Reprezentare ================= */
+        .rep-container { display: flex; gap: 40px; flex-wrap: wrap; }
+        .rep-col { flex: 1; min-width: 300px; background: var(--bg-white); padding: 40px; border-radius: 16px; border-left: 5px solid var(--primary-green); box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        .rep-col h3 { margin-bottom: 20px; color: var(--text-dark); display: flex; align-items: center; gap: 10px;}
+        .rep-col h3 i { color: var(--accent-gold); }
+        .rep-list li { padding: 12px 0; border-bottom: 1px solid var(--surface-light); display: flex; align-items: center; }
+        .rep-list i { color: var(--primary-green); margin-right: 15px; }
+
+        /* ================= Proiecte (Bento Grid) ================= */
+        .bento-section { background-color: var(--surface-light); }
+        .bento-container { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: auto auto; gap: 24px; max-width: 1200px; margin: 0 auto; }
+        .bento-box { background-color: var(--bg-white); border-radius: 20px; padding: 40px; transition: transform 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        .bento-box:hover { transform: translateY(-5px); }
+        .bento-box h3 { color: var(--primary-green); margin-bottom: 15px; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;}
+        .bento-large { grid-row: span 2; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('bal-sex.jpg') center/cover; color: var(--bg-white); display: flex; flex-direction: column; justify-content: flex-end; padding: 50px 40px;}
+        .bento-large h3 { color: var(--accent-gold); }
+
+        /* ================= Parteneri ================= */
+        .partners-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px; max-width: 1000px; margin: 0 auto; }
+        .partner-logo { width: 160px; height: 90px; background-color: var(--surface-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #999; transition: all 0.3s ease; }
+        .partner-logo:hover { transform: scale(1.05); color: var(--primary-green); background-color: var(--bg-white); box-shadow: 0 8px 20px rgba(0,0,0,0.05);}
+
+        /* ================= Footer ================= */
+        .site-footer { background-color: var(--text-dark); color: var(--bg-white); padding: 70px 5% 20px; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto 40px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 40px; }
+        .footer-brand h3 { font-family: 'Poppins', sans-serif; font-size: 1.8rem; color: var(--accent-gold); margin-bottom: 15px; }
+        .social-icons { display: flex; gap: 15px; margin-top: 20px;}
+        .social-icons a { width: 40px; height: 40px; border-radius: 50%; background-color: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: all 0.3s; color: var(--bg-white); font-size: 1.1rem;}
+        .social-icons a:hover { background-color: var(--accent-gold); color: var(--text-dark); transform: translateY(-3px);}
+        
+        .footer-col h4 { font-size: 1.1rem; margin-bottom: 20px; color: var(--bg-white); text-transform: uppercase; letter-spacing: 1px;}
+        .footer-col ul li { margin-bottom: 12px; color: #D1D8D4;}
+        .footer-col ul li a { transition: color 0.3s; }
+        .footer-col ul li a:hover { color: var(--accent-gold); }
+        .footer-bottom { text-align: center; color: #8A9A91; font-size: 0.85rem; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 15px;}
+
+        /* ================= Responsivitate ================= */
+        @media (max-width: 1024px) {
+            .usamv-menu { display: none; }
+            .team-card { flex: 0 0 calc((100% - 24px) / 2); }
+        }
+        @media (max-width: 768px) {
+            /* Logică Meniu Mobil */
+            .mobile-toggle { display: block; }
+            .assoc-nav ul { 
+                display: none; /* Ascuns default */
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--bg-white);
+                padding: 20px 0;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            }
+            .assoc-nav.active ul { display: flex; } /* Arată când e activ */
+
+            .hero h1 { font-size: 2.5rem; }
+            .bento-container { grid-template-columns: 1fr; }
+            .team-card { flex: 0 0 100%; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .footer-brand { grid-column: span 2; }
+            .rep-container { flex-direction: column; }
+        }
+        @media (max-width: 600px) {
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-brand { grid-column: 1; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body id="acasa">
+
+    <header class="usamv-header-container" id="globalHeader">
+        <div class="usamv-inner-wrapper">
+            <div class="usamv-logo">
+                <a href="https://usamv.ro">
+                    <img src="https://usamv.ro/wp-content/uploads/2022/10/Capture-removebg-preview.png" alt="USAMV București">
+                </a>
+            </div>
+            <nav class="usamv-menu">
+                <ul>
+                    <li><a href="https://usamv.ro">Universitate <i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="#">Educație <i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="#">Cercetare <i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="#">Internațional <i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="#" class="active">Studenți <i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="#">Știri</a></li>
+                </ul>
+            </nav>
+            <div class="usamv-tools">
+                <a href="#" class="lang-flag"><img src="https://usamv.ro/wp-content/plugins/sitepress-multilingual-cms/res/flags/en.png" alt="EN"></a>
+                <a href="#" class="lang-flag active"><img src="https://usamv.ro/wp-content/plugins/sitepress-multilingual-cms/res/flags/ro.png" alt="RO"></a>
+                <div style="color: var(--usamv-green); cursor: pointer; margin-left: 10px;"><i class="fas fa-search"></i></div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="assoc-header">
+        <div class="assoc-logo">
+            <a href="#acasa" style="display:flex; align-items:center; gap: 15px;">
+                <img src="logo-as.png" alt="Logo AS USAMV">
+                <span>AS-USAMV</span>
+            </a>
+        </div>
+
+        <div class="mobile-toggle" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <div class="assoc-nav" id="assocNav">
+            <ul>
+                <li><a href="#despre">Cine Suntem</a></li>
+                <li><a href="#echipa">Echipa</a></li>
+                <li><a href="#reprezentare">Reprezentare</a></li>
+                <li><a href="#proiecte">Proiecte</a></li>
+                <li><a href="#contact" class="btn btn-primary">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="acasa" class="hero">
+        <div class="hero-logo-container">
+            <img src="logo-as.png" alt="Logo"> 
+        </div>
+        <h1>Asociația Studenților USAMV</h1>
+        <p>Creat de noi, trăit de voi. Reprezentăm, unim și susținem studenții din Universitatea de Științe Agronomice și Medicină Veterinară din București.</p>
+        <div class="hero-buttons">
+            <a href="#contact" class="btn btn-primary">Devino Voluntar</a>
+            <a href="#proiecte" class="btn btn-outline">Proiectele Noastre</a>
+        </div>
+    </section>
+
+    <section id="despre" class="section">
+        <div class="section-header">
+            <h2>Suntem vocea ta în campus</h2>
+            <p>Organizația non-guvernamentală, apolitică și non-profit care reprezintă interesele studenților.</p>
+        </div>
+        <div class="about-text">
+            Misiunea noastră este să creăm un mediu universitar dinamic, să facilităm comunicarea dintre studenți și conducerea universității și să completăm pregătirea academică prin oportunități de dezvoltare personală și profesională.
+        </div>
+        <div class="pillars">
+            <div class="pillar">
+                <div class="pillar-icon"><i class="fas fa-bullhorn"></i></div>
+                <h4>Reprezentare</h4>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">Îți apărăm drepturile în Senat.</p>
+            </div>
+            <div class="pillar">
+                <div class="pillar-icon"><i class="fas fa-hands-helping"></i></div>
+                <h4>Voluntariat</h4>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">Implică-te activ în comunitate.</p>
+            </div>
+            <div class="pillar">
+                <div class="pillar-icon"><i class="fas fa-graduation-cap"></i></div>
+                <h4>Dezvoltare</h4>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">Skill-uri pentru viitoarea ta carieră.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="echipa" class="section team-section">
+        <div class="section-header">
+            <h2>Conducerea Asociației</h2>
+            <p>Oamenii care se asigură că vocea ta este auzită zi de zi.</p>
+        </div>
+        
+        <div class="carousel-wrapper">
+            <button class="carousel-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+            
+            <div class="carousel-viewport">
+                <div class="carousel-track" id="track">
+                    <div class="team-card">
+                        <img src="foto-presedinte.jpg" alt="Vlad Bucur" class="member-img">
+                        <h3 class="member-name">Vlad Bucur</h3>
+                        <span class="member-role">Președinte</span>
+                        <p class="member-contact"><i class="fas fa-envelope"></i> student@usamv.ro</p>
+                    </div>
+                    <div class="team-card">
+                        <img src="foto-secretar.jpg" alt="Mara Cotună" class="member-img">
+                        <h3 class="member-name">Mara Cotună</h3>
+                        <span class="member-role">Secretar General</span>
+                        <p class="member-contact"><i class="fas fa-envelope"></i> student@usamv.ro</p>
+                    </div>
+                    <div class="team-card">
+                        <img src="foto-externe.jpg" alt="Costachi Madălin" class="member-img">
+                        <h3 class="member-name">Costachi Madălin</h3>
+                        <span class="member-role">VP Relații Externe</span>
+                        <p class="member-contact"><i class="fas fa-envelope"></i> student@usamv.ro</p>
+                    </div>
+                    <div class="team-card">
+                        <img src="foto-interne.jpg" alt="Sviatoslav Floshtier" class="member-img">
+                        <h3 class="member-name">Sviatoslav Floshtier</h3>
+                        <span class="member-role">VP Relații Interne</span>
+                        <p class="member-contact"><i class="fas fa-envelope"></i> student@usamv.ro</p>
+                    </div>
+                    <div class="team-card">
+                        <img src="foto-univ.jpg" alt="Mihai Drăgan" class="member-img">
+                        <h3 class="member-name">Mihai Drăgan</h3>
+                        <span class="member-role">VP Relații cu Univ.</span>
+                        <p class="member-contact"><i class="fas fa-envelope"></i> student@usamv.ro</p>
+                    </div>
+                    <div class="team-card">
+                        <img src="foto-comunicare.jpg" alt="Andrei Burdușel" class="member-img">
+                        <h3 class="member-name">Andrei Burdușel</h3>
+                        <span class="member-role">VP Comunicare</span>
+                        <p class="member-contact"><i class="fas fa-envelope"></i> student@usamv.ro</p>
+                    </div>
+                    <div class="team-card">
+                        <img src="foto-vpmv.jpg" alt="Daniel Morogan" class="member-img">
+                        <h3 class="member-name">Daniel Morogan</h3>
+                        <span class="member-role">VP Med. Veterinară</span>
+                        <p class="member-contact"><i class="fas fa-envelope"></i> student@usamv.ro</p>
+                    </div>
+                    <div class="team-card">
+                        <img src="foto-pm.jpg" alt="Alexandra Dragomir" class="member-img">
+                        <h3 class="member-name">Alexandra Dragomir</h3>
+                        <span class="member-role">Dir. Project Mgmt.</span>
+                        <p class="member-contact"><i class="fas fa-envelope"></i> student@usamv.ro</p>
+                    </div>
+                    <div class="team-card">
+                        <img src="foto-mk-pr.jpg" alt="Bianca Afuza" class="member-img">
+                        <h3 class="member-name">Bianca Afuza</h3>
+                        <span class="member-role">Dir. Marketing&PR</span>
+                        <p class="member-contact"><i class="fas fa-envelope"></i> student@usamv.ro</p>
+                    </div>
+                    <div class="team-card">
+                        <img src="foto-fr.jpg" alt="Nicu Mîndrilă" class="member-img">
+                        <h3 class="member-name">Nicu Mîndrilă</h3>
+                        <span class="member-role">Dir. Fundraising</span>
+                        <p class="member-contact"><i class="fas fa-envelope"></i> student@usamv.ro</p>
+                    </div>
+                    <div class="team-card">
+                        <img src="foto-hr.jpg" alt="Ana Manailă" class="member-img">
+                        <h3 class="member-name">Ana Manailă</h3>
+                        <span class="member-role">Director HR</span>
+                        <p class="member-contact"><i class="fas fa-envelope"></i> student@usamv.ro</p>
+                    </div>
+                    <div class="team-card">
+                        <img src="foto-edu.jpg" alt="Ilinca Neculai" class="member-img">
+                        <h3 class="member-name">Ilinca Neculai</h3>
+                        <span class="member-role">Director EDU</span>
+                        <p class="member-contact"><i class="fas fa-envelope"></i> student@usamv.ro</p>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="carousel-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </section>
+
+    <section id="reprezentare" class="section">
+        <div class="section-header">
+            <h2>Reprezentare Studențească</h2>
+            <p>Interesele tale sunt protejate în forurile decizionale.</p>
+        </div>
+        <div class="rep-container">
+            <div class="rep-col">
+                <h3><i class="fas fa-university"></i> Reprezentanți SENAT</h3>
+                <ul class="rep-list">
+                    <li><i class="fas fa-check-circle"></i> Popescu Andrei (Horticultură)</li>
+                    <li><i class="fas fa-check-circle"></i> Ionescu Maria (Veterinară)</li>
+                    <li><i class="fas fa-check-circle"></i> Radu Vlad (Agricultură)</li>
+                    <li><i class="fas fa-check-circle"></i> Stan Elena (Biotehnologii)</li>
+                    <li><i class="fas fa-check-circle"></i> Dumitru Paul (FIFIM)</li>
+                </ul>
+            </div>
+            
+            <div class="rep-col">
+                <h3><i class="fas fa-users"></i> Consilii Facultăți</h3>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Studenții consilieri sunt prima persoană la care trebuie să apelezi dacă ai o problemă în facultate. Ei mențin legătura directă cu decanatul.</p>
+                <a href="#" style="color: var(--primary-green); font-weight: 600; text-decoration: underline;">Vezi lista completă a consilierilor <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="proiecte" class="section bento-section">
+        <div class="section-header">
+            <h2>Proiecte Recurente</h2>
+            <p>Descoperă activitățile noastre principale de peste an.</p>
+        </div>
+        <div class="bento-container">
+            <div class="bento-box bento-large">
+                <h3><i class="fas fa-star"></i> Proiectul Anului</h3>
+                <h4 style="font-size: 2.5rem; margin-top: auto; margin-bottom: 10px;">Balul Bobocilor USAMV</h4>
+                <p style="color: #f0f0f0; margin-bottom: 30px; font-weight: 300;">Cel mai mare eveniment social al anului. Vino să sărbătorim începutul unui nou an universitar alături de colegii tăi!</p>
+                <a href="#" class="btn btn-primary" style="width: max-content;">Vezi Galerie Foto</a>
+            </div>
+            <div class="bento-box">
+                <h3><i class="fas fa-chalkboard-teacher"></i> Congresul Studențesc</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">Participă la workshop-uri de dezvoltare profesională și dezbateri academice de cel mai înalt nivel.</p>
+            </div>
+            <div class="bento-box">
+                <h3><i class="fas fa-heart"></i> Campanii Umanitare</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">Ne pasă de comunitate. Organizăm periodic colecte, donații și acțiuni de voluntariat civic.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="parteneri" class="section">
+        <div class="section-header">
+            <h2>Partenerii Noștri</h2>
+        </div>
+        <div class="partners-grid">
+            <div class="partner-logo">Logo Partener 1</div>
+            <div class="partner-logo">Logo Partener 2</div>
+            <div class="partner-logo">Logo Partener 3</div>
+            <div class="partner-logo">Logo Partener 4</div>
+        </div>
+    </section>
+
+    <footer id="contact" class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>AS-USAMV</h3>
+                <p>Vocea studenților din Universitatea de Științe Agronomice și Medicină Veterinară București.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Universitate</h4>
+                <ul>
+                    <li><a href="#">Facultăți</a></li>
+                    <li><a href="#">Mobilități și Burse</a></li>
+                    <li><a href="#">Colegiul Terțiar</a></li>
+                    <li><a href="#">Cămine Studențești</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Informații Utile</h4>
+                <ul>
+                    <li><a href="#">Formular Înscriere Voluntari</a></li>
+                    <li><a href="#">Centrul de Consiliere (CCOC)</a></li>
+                    <li><a href="#">Documentele Universității</a></li>
+                    <li><a href="#">Contact Secretariat</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contact Asociație</h4>
+                <ul style="color: #D1D8D4;">
+                    <li><i class="fas fa-map-marker-alt" style="color: var(--accent-gold); width: 20px;"></i> Campus Agronomie, Clădirea CCOC, Demisol</li>
+                    <li><i class="fas fa-envelope" style="color: var(--accent-gold); width: 20px;"></i> <a href="mailto:contact@as-usamv.ro">contact@as-usamv.ro</a></li>
+                    <li><i class="fas fa-envelope" style="color: var(--accent-gold); width: 20px;"></i> <a href="mailto:presedinte@as-usamv.ro">presedinte@as-usamv.ro</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div>&copy; 2024 Asociația Studenților USAMV. Toate drepturile rezervate.</div>
+            <div style="display: flex; gap: 20px;">
+                <a href="#" style="transition: color 0.3s; color: inherit;">Politica de confidențialitate</a>
+                <a href="#" style="transition: color 0.3s; color: inherit;">Politica de cookies</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            /* --- 1. Smart Header --- */
+            const globalHeader = document.getElementById('globalHeader');
+            let lastScrollY = window.scrollY;
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) { 
+                    globalHeader.style.transform = 'translateY(-100%)'; 
+                } else {
+                    globalHeader.style.transform = 'translateY(0)'; 
+                }
+                lastScrollY = window.scrollY;
+            });
+
+            /* --- 2. Mobile Menu Toggle --- */
+            const mobileBtn = document.getElementById('mobileMenuBtn');
+            const mobileNav = document.getElementById('assocNav');
+
+            mobileBtn.addEventListener('click', () => {
+                mobileNav.classList.toggle('active');
+                
+                // Schimbăm iconița
+                const icon = mobileBtn.querySelector('i');
+                if (mobileNav.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            // Închide meniul când dăm click pe un link
+            const navLinks = mobileNav.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                    const icon = mobileBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+
+            /* --- 3. Carusel Infinit + Swipe --- */
+            const track = document.getElementById('track');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const carouselWrapper = document.querySelector('.carousel-wrapper');
+            let isAnimating = false;
+
+            function getVisibleCards() {
+                if (window.innerWidth <= 768) return 1;
+                if (window.innerWidth <= 1024) return 2;
+                return 3;
+            }
+
+            function moveNext() {
+                if (isAnimating) return;
+                isAnimating = true;
+
+                const visibleCards = getVisibleCards();
+                const firstCard = track.children[0];
+                const cardWidth = firstCard.getBoundingClientRect().width;
+                const gap = 24; 
+                const moveDistance = (cardWidth + gap) * visibleCards;
+
+                track.style.transition = 'transform 0.5s ease-in-out';
+                track.style.transform = `translateX(-${moveDistance}px)`;
+
+                track.addEventListener('transitionend', function handler() {
+                    track.style.transition = 'none'; 
+                    track.style.transform = 'translateX(0)'; 
+                    
+                    for (let i = 0; i < visibleCards; i++) {
+                        track.appendChild(track.children[0]);
+                    }
+                    
+                    track.removeEventListener('transitionend', handler);
+                    isAnimating = false;
+                });
+            }
+
+            function movePrev() {
+                if (isAnimating) return;
+                isAnimating = true;
+
+                const visibleCards = getVisibleCards();
+                const firstCard = track.children[0];
+                const cardWidth = firstCard.getBoundingClientRect().width;
+                const gap = 24;
+                const moveDistance = (cardWidth + gap) * visibleCards;
+
+                for (let i = 0; i < visibleCards; i++) {
+                    track.insertBefore(track.lastElementChild, track.firstElementChild);
+                }
+
+                track.style.transition = 'none';
+                track.style.transform = `translateX(-${moveDistance}px)`;
+                
+                track.offsetHeight; 
+
+                track.style.transition = 'transform 0.5s ease-in-out';
+                track.style.transform = `translateX(0)`;
+
+                track.addEventListener('transitionend', function handler() {
+                    track.removeEventListener('transitionend', handler);
+                    isAnimating = false;
+                });
+            }
+
+            nextBtn.addEventListener('click', moveNext);
+            prevBtn.addEventListener('click', movePrev);
+
+            // Logică SWIPE pentru telefon
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            carouselWrapper.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, {passive: true});
+
+            carouselWrapper.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, {passive: true});
+
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 50) moveNext(); // Swipe Stânga
+                if (touchEndX > touchStartX + 50) movePrev(); // Swipe Dreapta
+            }
+        });
+    </script>
+</body>
+</html>
